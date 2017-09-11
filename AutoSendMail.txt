@@ -1,0 +1,58 @@
+Private Sub SendMail_Click()
+On Error GoTo ErrHandler
+
+    ' Declare Object Outlook
+    Dim objOutlook As Object
+    Set objOutlook = CreateObject("Outlook.Application")
+    
+    ' Declare Object Email
+    Dim objEmail As Object
+    Set objEmail = objOutlook.CreateItem(olMailItem)
+     
+    ' Declare variable mail
+    Dim var_To As String
+    Dim var_Subject As String
+    Dim var_Body As String
+    Dim var_CC As String
+    Dim var_BCC As String
+    Dim var_Attachments As String
+    Dim StrSignature As String
+    Dim var_Path As String
+    
+    var_To = Worksheets("Variable").Range("A2").Value
+    var_Subject = Worksheets("Variable").Range("B2").Value
+    var_CC = Worksheets("Variable").Range("C2").Value
+    var_Body = Worksheets("Variable").Range("E2").Value
+    var_BCC = Worksheets("Variable").Range("E2").Value
+    var_Attachments = Worksheets("Variable").Range("F2").Value
+    var_Path = "C:/Users/longnv2/AppData/Roaming/Microsoft/Signatures/LongNV2.htm"
+    
+    ' StrSignature = GetSignature("C:\Users\longnv2\AppData\Roaming\Microsoft\Signatures")
+    StrSignature = GetSignature(var_Path)
+    
+    
+    With objEmail
+        .to = var_To
+        .Subject = var_Subject
+        .CC = var_CC
+        .HTMLBody = var_Body & StrSignature
+        .Attachments.Add (var_Attachments)
+        .Display
+    End With
+
+ErrHandler:
+    Set objEmail = Nothing
+    Set objOutlook = Nothing
+
+End Sub
+
+    ' Add signature
+Function GetSignature(fPath As String) As String
+    Dim fso As Object
+    Dim TSet As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set TSet = fso.GetFile(fPath).OpenAsTextStream(1, -2)
+    GetSignature = TSet.readall
+    TSet.Close
+End Function
+
