@@ -1,0 +1,45 @@
+    data1 = Excel.CurrentWorkbook(){[Name="DATE"]}[Content],
+    
+    data = data1{0}[DATE],
+
+	
+    declare @cob_date date
+
+    set @cob_date = (select COB_DATE
+			from (
+			select FULL_DATE AS COB_DATE,
+					row_number() over (order by FULL_DATE desc) rn
+			from (
+			    SELECT distinct FULL_DATE
+		        FROM [PVCom].[dbo].[DIMCALENDAR]
+		        where FULL_DATE <= '"&data&"' AND FLAG = 1 ) a
+						) b 
+			where rn = 2)
+
+
+let
+    data1 = Excel.CurrentWorkbook(){[Name="COB_DATE"]}[Content],    
+    data = data1{0}[COB_DATE],
+
+    Source = Sql.Database("10.0.25.31", "PVCom", [Query="
+    declare @end_date
+        set @end_date = (
+                    select datea
+		from (
+		    select datea,
+			row_number() over (order by datea desc) rn
+		    from (
+			    SELECT distinct full_date datea
+		              FROM [PVCom].[dbo].[DimCalendar]
+		              where full_date <= '"&data&"'
+                                          and  flag = 1) a
+				) b 
+		where rn = 2
+
+)
+
+    exec PCD_DepositReportDaily @end_date
+
+"])
+in
+    Source

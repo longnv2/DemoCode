@@ -1,0 +1,13 @@
+RIGHT(@[User::Cob_Date], 2 ) + "-" + (
+MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 1 ? "Jan" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 2 ? "Feb" :  
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 3 ? "Mar" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 4 ? "Apr" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 5 ? "May" :
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 6 ? "Jun" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 7 ? "Jul" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 8 ? "Aug" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 9 ? "Sep" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 10 ? "Oct" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 11 ? "Nov" : 
+(MONTH((DT_DATE)(SUBSTRING( @[User::Cob_Date] , 5, 2) + "/" +  RIGHT( @[User::Cob_Date], 2 ) + "/" +  LEFT( @[User::Cob_Date] , 4))) == 12? "Dec":"")))))))))))) + "-"+  LEFT(@[User::Cob_Date], 4 )
